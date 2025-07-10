@@ -1,0 +1,58 @@
+[
+  {
+    "Id": 1,
+    "amount": 12.50,
+    "category": "Personal",
+    "description": "Coffee and pastry",
+    "date": "2024-01-15T08:30:00Z"
+  },
+  {
+    "Id": 2,
+    "amount": 45.00,
+    "category": "Health",
+    "description": "Gym membership",
+    "date": "2024-01-15T10:00:00Z"
+  },
+  {
+    "Id": 3,
+    "amount": 23.75,
+    "category": "Work",
+    "description": "Lunch meeting",
+    "date": "2024-01-15T12:15:00Z"
+  },
+  {
+    "Id": 4,
+    "amount": 89.99,
+    "category": "Learning",
+    "description": "Online course subscription",
+    "date": "2024-01-14T16:45:00Z"
+  },
+  {
+    "Id": 5,
+    "amount": 67.50,
+    "category": "Leisure",
+    "description": "Movie tickets and dinner",
+    "date": "2024-01-14T19:30:00Z"
+  },
+  {
+    "Id": 6,
+    "amount": 156.80,
+    "category": "Finance",
+    "description": "Investment platform fee",
+    "date": "2024-01-13T11:20:00Z"
+  },
+  {
+    "Id": 7,
+    "amount": 34.25,
+    "category": "Personal",
+    "description": "Grocery shopping",
+    "date": "2024-01-13T15:45:00Z"
+  },
+  {
+    "Id": 8,
+    "amount": 18.00,
+    "category": "Health",
+    "description": "Vitamins and supplements",
+    "date": "2024-01-12T09:15:00Z"
+  }
+]

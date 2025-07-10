@@ -8,9 +8,9 @@ const CategoryBadge = ({ category, className }) => {
     Personal: { variant: "success", label: "Personal" },
     Health: { variant: "error", label: "Health" },
     Learning: { variant: "warning", label: "Learning" },
-    Leisure: { variant: "info", label: "Leisure" }
+    Leisure: { variant: "info", label: "Leisure" },
+    Finance: { variant: "accent", label: "Finance" }
   };
-
   const config = categoryConfig[category] || categoryConfig.Personal;
 
   return (

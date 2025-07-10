@@ -9,7 +9,7 @@ import TodayPage from "@/components/pages/TodayPage";
 import CalendarPage from "@/components/pages/CalendarPage";
 import TasksPage from "@/components/pages/TasksPage";
 import NotesPage from "@/components/pages/NotesPage";
-
+import BudgetPage from "@/components/pages/BudgetPage";
 function App() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [showQuickAdd, setShowQuickAdd] = useState(false);
@@ -39,11 +39,12 @@ function App() {
         />
         
         <main className="p-4 lg:p-6">
-          <Routes>
+<Routes>
             <Route path="/" element={<TodayPage />} />
             <Route path="/calendar" element={<CalendarPage />} />
             <Route path="/tasks" element={<TasksPage />} />
             <Route path="/notes" element={<NotesPage />} />
+            <Route path="/budget" element={<BudgetPage />} />
           </Routes>
         </main>
       </div>

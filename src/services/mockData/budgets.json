@@ -1,0 +1,38 @@
+[
+  {
+    "Id": 1,
+    "category": "Personal",
+    "dailyLimit": 50.00,
+    "monthlyLimit": 1500.00
+  },
+  {
+    "Id": 2,
+    "category": "Work",
+    "dailyLimit": 30.00,
+    "monthlyLimit": 900.00
+  },
+  {
+    "Id": 3,
+    "category": "Health",
+    "dailyLimit": 25.00,
+    "monthlyLimit": 750.00
+  },
+  {
+    "Id": 4,
+    "category": "Learning",
+    "dailyLimit": 15.00,
+    "monthlyLimit": 450.00
+  },
+  {
+    "Id": 5,
+    "category": "Leisure",
+    "dailyLimit": 40.00,
+    "monthlyLimit": 1200.00
+  },
+  {
+    "Id": 6,
+    "category": "Finance",
+    "dailyLimit": 20.00,
+    "monthlyLimit": 600.00
+  }
+]

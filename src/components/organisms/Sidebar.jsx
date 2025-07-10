@@ -7,13 +7,13 @@ import ApperIcon from "@/components/ApperIcon";
 const Sidebar = ({ isOpen, onClose }) => {
   const location = useLocation();
 
-  const navigation = [
+const navigation = [
     { name: "Today", href: "/", icon: "Home" },
     { name: "Calendar", href: "/calendar", icon: "Calendar" },
     { name: "Tasks", href: "/tasks", icon: "CheckSquare" },
-    { name: "Notes", href: "/notes", icon: "FileText" }
+    { name: "Notes", href: "/notes", icon: "FileText" },
+    { name: "Budget", href: "/budget", icon: "DollarSign" }
   ];
-
   const SidebarContent = () => (
     <div className="flex flex-col h-full bg-white">
       <div className="flex items-center justify-between p-6 border-b border-gray-200">
@@ -55,7 +55,7 @@ const Sidebar = ({ isOpen, onClose }) => {
         ))}
       </nav>
 
-      <div className="p-4 border-t border-gray-200">
+<div className="p-4 border-t border-gray-200">
         <div className="bg-gradient-to-r from-primary/5 to-secondary/5 rounded-lg p-4">
           <h3 className="font-semibold text-gray-900 mb-2">
             Quick Stats
@@ -68,6 +68,14 @@ const Sidebar = ({ isOpen, onClose }) => {
             <div className="flex justify-between">
               <span>Completed</span>
               <span className="font-medium text-success">3</span>
+            </div>
+            <div className="flex justify-between">
+              <span>Today's Budget</span>
+              <span className="font-medium text-accent">$50</span>
+            </div>
+            <div className="flex justify-between">
+              <span>Spent</span>
+              <span className="font-medium text-error">$35</span>
             </div>
           </div>
         </div>
