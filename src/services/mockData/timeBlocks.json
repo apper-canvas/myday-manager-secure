@@ -1,0 +1,74 @@
+[
+  {
+    "Id": 1,
+    "title": "Morning Standup",
+    "startTime": "2024-01-15T09:00:00.000Z",
+    "endTime": "2024-01-15T09:30:00.000Z",
+    "category": "Work",
+    "color": "#5B4CDB",
+    "reminder": true
+  },
+  {
+    "Id": 2,
+    "title": "Deep Work Session",
+    "startTime": "2024-01-15T10:00:00.000Z",
+    "endTime": "2024-01-15T12:00:00.000Z",
+    "category": "Work",
+    "color": "#5B4CDB",
+    "reminder": false
+  },
+  {
+    "Id": 3,
+    "title": "Lunch Break",
+    "startTime": "2024-01-15T12:00:00.000Z",
+    "endTime": "2024-01-15T13:00:00.000Z",
+    "category": "Personal",
+    "color": "#4ECDC4",
+    "reminder": true
+  },
+  {
+    "Id": 4,
+    "title": "Gym Workout",
+    "startTime": "2024-01-15T18:00:00.000Z",
+    "endTime": "2024-01-15T19:30:00.000Z",
+    "category": "Health",
+    "color": "#FF6B6B",
+    "reminder": true
+  },
+  {
+    "Id": 5,
+    "title": "Evening Reading",
+    "startTime": "2024-01-15T20:00:00.000Z",
+    "endTime": "2024-01-15T21:00:00.000Z",
+    "category": "Learning",
+    "color": "#FFD93D",
+    "reminder": false
+  },
+  {
+    "Id": 6,
+    "title": "Client Meeting",
+    "startTime": "2024-01-16T14:00:00.000Z",
+    "endTime": "2024-01-16T15:00:00.000Z",
+    "category": "Work",
+    "color": "#5B4CDB",
+    "reminder": true
+  },
+  {
+    "Id": 7,
+    "title": "Movie Night",
+    "startTime": "2024-01-16T19:00:00.000Z",
+    "endTime": "2024-01-16T21:30:00.000Z",
+    "category": "Leisure",
+    "color": "#4DA6FF",
+    "reminder": false
+  },
+  {
+    "Id": 8,
+    "title": "Morning Yoga",
+    "startTime": "2024-01-17T07:00:00.000Z",
+    "endTime": "2024-01-17T08:00:00.000Z",
+    "category": "Health",
+    "color": "#FF6B6B",
+    "reminder": true
+  }
+]

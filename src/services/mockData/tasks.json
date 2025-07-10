@@ -1,0 +1,56 @@
+[
+  {
+    "Id": 1,
+    "title": "Complete project proposal",
+    "description": "Finish the quarterly project proposal and submit it to the team for review",
+    "priority": "High",
+    "dueDate": "2024-01-15T23:59:59.000Z",
+    "status": "In Progress",
+    "kanbanColumn": "In Progress"
+  },
+  {
+    "Id": 2,
+    "title": "Review team performance",
+    "description": "Conduct performance reviews for team members and provide feedback",
+    "priority": "Medium",
+    "dueDate": "2024-01-20T23:59:59.000Z",
+    "status": "To Do",
+    "kanbanColumn": "To Do"
+  },
+  {
+    "Id": 3,
+    "title": "Update website content",
+    "description": "Refresh the about page and add new team member profiles",
+    "priority": "Low",
+    "dueDate": "2024-01-25T23:59:59.000Z",
+    "status": "Done",
+    "kanbanColumn": "Done"
+  },
+  {
+    "Id": 4,
+    "title": "Plan marketing campaign",
+    "description": "Create a comprehensive marketing strategy for the upcoming product launch",
+    "priority": "High",
+    "dueDate": "2024-01-18T23:59:59.000Z",
+    "status": "To Do",
+    "kanbanColumn": "To Do"
+  },
+  {
+    "Id": 5,
+    "title": "Organize team meeting",
+    "description": "Schedule and prepare agenda for monthly team meeting",
+    "priority": "Medium",
+    "dueDate": "2024-01-22T23:59:59.000Z",
+    "status": "In Progress",
+    "kanbanColumn": "In Progress"
+  },
+  {
+    "Id": 6,
+    "title": "Research new tools",
+    "description": "Investigate productivity tools that could benefit the team",
+    "priority": "Low",
+    "dueDate": "2024-01-30T23:59:59.000Z",
+    "status": "To Do",
+    "kanbanColumn": "To Do"
+  }
+]

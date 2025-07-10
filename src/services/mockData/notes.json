@@ -1,0 +1,50 @@
+[
+  {
+    "Id": 1,
+    "title": "Project Ideas",
+    "content": "<h3>Brainstorming Session</h3><p>Here are some ideas for upcoming projects:</p><ul><li>Mobile app redesign</li><li>Customer feedback system</li><li>Team collaboration tools</li></ul><p>Need to prioritize based on impact and resources.</p>",
+    "tags": ["projects", "brainstorming", "ideas"],
+    "createdAt": "2024-01-10T10:00:00.000Z",
+    "updatedAt": "2024-01-12T14:30:00.000Z"
+  },
+  {
+    "Id": 2,
+    "title": "Meeting Notes - Q1 Planning",
+    "content": "<h3>Q1 Planning Meeting</h3><p><strong>Date:</strong> January 8, 2024</p><p><strong>Attendees:</strong> Sarah, Mike, Alex, Lisa</p><h4>Key Points:</h4><ul><li>Budget allocation for new initiatives</li><li>Timeline for product launch</li><li>Team capacity and resource planning</li></ul><p>Follow-up actions assigned to each team member.</p>",
+    "tags": ["meetings", "planning", "Q1"],
+    "createdAt": "2024-01-08T16:00:00.000Z",
+    "updatedAt": "2024-01-08T16:45:00.000Z"
+  },
+  {
+    "Id": 3,
+    "title": "Learning Notes - React Hooks",
+    "content": "<h3>React Hooks Deep Dive</h3><p>Understanding the advanced patterns and best practices:</p><ul><li><strong>useState:</strong> Managing component state</li><li><strong>useEffect:</strong> Side effects and lifecycle</li><li><strong>useContext:</strong> Consuming context values</li><li><strong>useReducer:</strong> Complex state management</li></ul><p>Custom hooks can encapsulate logic and make components cleaner.</p>",
+    "tags": ["learning", "react", "development"],
+    "createdAt": "2024-01-05T20:00:00.000Z",
+    "updatedAt": "2024-01-11T19:30:00.000Z"
+  },
+  {
+    "Id": 4,
+    "title": "Book Summary - Atomic Habits",
+    "content": "<h3>Atomic Habits by James Clear</h3><p>Key takeaways from this excellent book on habit formation:</p><ul><li>Make it obvious - Design your environment</li><li>Make it attractive - Bundle with enjoyable activities</li><li>Make it easy - Reduce friction</li><li>Make it satisfying - Immediate rewards</li></ul><p>Small changes compound over time to create remarkable results.</p>",
+    "tags": ["books", "habits", "productivity"],
+    "createdAt": "2024-01-03T21:00:00.000Z",
+    "updatedAt": "2024-01-03T21:30:00.000Z"
+  },
+  {
+    "Id": 5,
+    "title": "Recipe Collection",
+    "content": "<h3>Favorite Recipes</h3><h4>Breakfast</h4><ul><li>Overnight oats with berries</li><li>Avocado toast with poached egg</li></ul><h4>Lunch</h4><ul><li>Mediterranean quinoa bowl</li><li>Asian-inspired stir-fry</li></ul><h4>Dinner</h4><ul><li>Grilled salmon with vegetables</li><li>Homemade pasta with fresh herbs</li></ul><p>All recipes are healthy and take less than 30 minutes to prepare.</p>",
+    "tags": ["cooking", "recipes", "health"],
+    "createdAt": "2024-01-01T15:00:00.000Z",
+    "updatedAt": "2024-01-09T18:00:00.000Z"
+  },
+  {
+    "Id": 6,
+    "title": "Travel Planning - Europe Trip",
+    "content": "<h3>Europe Trip 2024</h3><p><strong>Duration:</strong> 2 weeks in summer</p><p><strong>Countries:</strong> France, Italy, Spain</p><h4>Must-see places:</h4><ul><li>Paris - Eiffel Tower, Louvre</li><li>Rome - Colosseum, Vatican</li><li>Barcelona - Sagrada Familia, Park Güell</li></ul><p>Budget estimate: $3000 per person including flights and accommodation.</p>",
+    "tags": ["travel", "vacation", "europe"],
+    "createdAt": "2024-01-07T12:00:00.000Z",
+    "updatedAt": "2024-01-13T10:00:00.000Z"
+  }
+]

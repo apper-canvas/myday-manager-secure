@@ -1,0 +1,353 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import 'react-toastify/dist/ReactToastify.css';
+
+/* Custom toast styling */
+.Toastify__toast-container {
+  z-index: 9999 !important;
+}
+
+.Toastify__toast {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 14px !important;
+  padding: 12px 16px !important;
+  border-radius: 8px !important;
+  margin-bottom: 8px !important;
+  max-width: 350px !important;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15) !important;
+}
+
+.Toastify__toast--success {
+  background: #4ECDC4 !important;
+  color: white !important;
+}
+
+.Toastify__toast--error {
+  background: #FF6B6B !important;
+  color: white !important;
+}
+
+.Toastify__toast--warning {
+  background: #FFD93D !important;
+  color: #1F2937 !important;
+}
+
+.Toastify__toast--info {
+  background: #4DA6FF !important;
+  color: white !important;
+}
+
+.Toastify__progress-bar {
+  background: rgba(255, 255, 255, 0.7) !important;
+}
+
+/* Smooth transitions for all interactive elements */
+* {
+  transition: all 0.2s ease-out;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+/* Drag and drop styles */
+.dragging {
+  opacity: 0.5;
+  transform: rotate(5deg);
+}
+
+.drop-zone {
+  border: 2px dashed #5B4CDB;
+  background: rgba(91, 76, 219, 0.1);
+  border-radius: 8px;
+}
+
+/* Rich text editor styles */
+.rich-editor {
+  min-height: 200px;
+  padding: 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.rich-editor:focus {
+  outline: none;
+  border-color: #5B4CDB;
+  box-shadow: 0 0 0 3px rgba(91, 76, 219, 0.1);
+}
+
+.rich-editor strong {
+  font-weight: 600;
+}
+
+.rich-editor em {
+  font-style: italic;
+}
+
+.rich-editor ul, .rich-editor ol {
+  padding-left: 1.5rem;
+}
+
+.rich-editor li {
+  margin-bottom: 0.25rem;
+}
+
+/* Tag styles */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 8px;
+  background: #F3F4F6;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #374151;
+  margin-right: 6px;
+  margin-bottom: 4px;
+}
+
+.tag-primary {
+  background: rgba(91, 76, 219, 0.1);
+  color: #5B4CDB;
+}
+
+.tag-success {
+  background: rgba(78, 205, 196, 0.1);
+  color: #4ECDC4;
+}
+
+.tag-warning {
+  background: rgba(255, 217, 61, 0.1);
+  color: #D97706;
+}
+
+.tag-error {
+  background: rgba(255, 107, 107, 0.1);
+  color: #FF6B6B;
+}
+
+/* Priority indicators */
+.priority-high {
+  background: #FF6B6B;
+  color: white;
+}
+
+.priority-medium {
+  background: #FFD93D;
+  color: #1F2937;
+}
+
+.priority-low {
+  background: #4ECDC4;
+  color: white;
+}
+
+/* Status indicators */
+.status-todo {
+  background: #E5E7EB;
+  color: #374151;
+}
+
+.status-in-progress {
+  background: #4DA6FF;
+  color: white;
+}
+
+.status-done {
+  background: #4ECDC4;
+  color: white;
+}
+
+/* Custom focus styles */
+.focus-ring:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(91, 76, 219, 0.1);
+}
+
+/* Kanban column styles */
+.kanban-column {
+  min-height: 500px;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 16px;
+  background: white;
+}
+
+.kanban-column.drag-over {
+  background: rgba(91, 76, 219, 0.05);
+  border-color: #5B4CDB;
+}
+
+/* Calendar grid styles */
+.calendar-grid {
+  display: grid;
+  grid-template-columns: auto repeat(7, 1fr);
+  gap: 1px;
+  background: #e5e7eb;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.calendar-cell {
+  background: white;
+  min-height: 80px;
+  padding: 8px;
+  position: relative;
+}
+
+.calendar-cell:hover {
+  background: #f9fafb;
+}
+
+.time-block {
+  background: linear-gradient(135deg, #5B4CDB 0%, #7C6FE4 100%);
+  color: white;
+  padding: 6px 8px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  margin-bottom: 4px;
+  cursor: move;
+}
+
+.time-block:hover {
+  transform: scale(1.02);
+  box-shadow: 0 4px 12px rgba(91, 76, 219, 0.3);
+}
+
+.time-block.category-work {
+  background: linear-gradient(135deg, #5B4CDB 0%, #7C6FE4 100%);
+}
+
+.time-block.category-personal {
+  background: linear-gradient(135deg, #4ECDC4 0%, #45B7B8 100%);
+}
+
+.time-block.category-health {
+  background: linear-gradient(135deg, #FF6B6B 0%, #FF5252 100%);
+}
+
+.time-block.category-learning {
+  background: linear-gradient(135deg, #FFD93D 0%, #FFC107 100%);
+  color: #1F2937;
+}
+
+.time-block.category-leisure {
+  background: linear-gradient(135deg, #4DA6FF 0%, #2196F3 100%);
+}
+
+/* Animation classes */
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.3s ease-out;
+}
+
+.animate-bounce-in {
+  animation: bounceIn 0.4s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { 
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Floating action button */
+.fab {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #5B4CDB 0%, #7C6FE4 100%);
+  color: white;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 12px 24px rgba(91, 76, 219, 0.3);
+  z-index: 100;
+}
+
+.fab:hover {
+  transform: scale(1.1);
+  box-shadow: 0 16px 32px rgba(91, 76, 219, 0.4);
+}
+
+.fab:active {
+  transform: scale(0.95);
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 768px) {
+  .fab {
+    bottom: 16px;
+    right: 16px;
+    width: 48px;
+    height: 48px;
+  }
+  
+  .kanban-column {
+    min-height: 400px;
+  }
+  
+  .calendar-cell {
+    min-height: 60px;
+    padding: 4px;
+  }
+  
+  .time-block {
+    font-size: 10px;
+    padding: 4px 6px;
+  }
+}
