@@ -47,9 +47,9 @@ const BudgetWidget = () => {
 
   const getTotalDailyLimit = () => {
     return budgets.reduce((total, budget) => total + (budget.dailyLimit || 0), 0);
-  };
+};
 
-  const getTopCategories = () => {
+  const getCategoryBreakdown = () => {
     const categorySpending = {};
     const today = format(new Date(), "yyyy-MM-dd");
     
@@ -61,8 +61,22 @@ const BudgetWidget = () => {
 
     return Object.entries(categorySpending)
       .sort(([,a], [,b]) => b - a)
-      .slice(0, 3)
       .map(([category, amount]) => ({ category, amount }));
+  };
+
+  const getTopCategories = () => {
+    return getCategoryBreakdown().slice(0, 3);
+  };
+
+  const getCategoryBudget = (category) => {
+    const budget = budgets.find(b => b.category === category);
+    return budget ? budget.dailyLimit : 0;
+  };
+
+  const getCategoryProgress = (category) => {
+    const spending = getCategoryBreakdown().find(c => c.category === category)?.amount || 0;
+    const budget = getCategoryBudget(category);
+    return budget > 0 ? (spending / budget) * 100 : 0;
   };
 
   if (loading) {
@@ -81,10 +95,11 @@ const BudgetWidget = () => {
     );
   }
 
-  const todaySpending = getTodaySpending();
+const todaySpending = getTodaySpending();
   const totalDailyLimit = getTotalDailyLimit();
   const progressPercentage = totalDailyLimit > 0 ? (todaySpending / totalDailyLimit) * 100 : 0;
   const topCategories = getTopCategories();
+  const categoryBreakdown = getCategoryBreakdown();
 
   return (
     <motion.div
@@ -137,18 +152,40 @@ const BudgetWidget = () => {
             )}
           </div>
 
-          {topCategories.length > 0 && (
+{categoryBreakdown.length > 0 && (
             <div className="pt-2 border-t border-gray-200">
-              <div className="text-sm font-medium text-gray-700 mb-2">Top Categories</div>
-              <div className="space-y-1">
-                {topCategories.map(({ category, amount }) => (
-                  <div key={category} className="flex items-center justify-between">
-                    <CategoryBadge category={category} />
-                    <span className="text-sm font-medium text-gray-900">
-                      ${amount.toFixed(2)}
-                    </span>
-                  </div>
-                ))}
+              <div className="text-sm font-medium text-gray-700 mb-3">Category Breakdown</div>
+              <div className="space-y-2">
+                {categoryBreakdown.map(({ category, amount }) => {
+                  const budget = getCategoryBudget(category);
+                  const progress = getCategoryProgress(category);
+                  return (
+                    <div key={category} className="space-y-1">
+                      <div className="flex items-center justify-between">
+                        <CategoryBadge category={category} />
+                        <span className="text-sm font-medium text-gray-900">
+                          ${amount.toFixed(2)}
+                          {budget > 0 && (
+                            <span className="text-xs text-gray-500 ml-1">
+                              / ${budget.toFixed(2)}
+                            </span>
+                          )}
+                        </span>
+                      </div>
+                      {budget > 0 && (
+                        <div className="w-full bg-gray-200 rounded-full h-1.5">
+                          <div 
+                            className={`h-1.5 rounded-full transition-all duration-300 ${
+                              progress > 100 ? 'bg-red-500' : 
+                              progress > 80 ? 'bg-yellow-500' : 'bg-green-500'
+                            }`}
+                            style={{ width: `${Math.min(progress, 100)}%` }}
+                          />
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
               </div>
             </div>
           )}

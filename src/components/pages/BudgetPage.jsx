@@ -23,6 +23,9 @@ const BudgetPage = () => {
   const [showBudgetForm, setShowBudgetForm] = useState(false);
   const [editingExpense, setEditingExpense] = useState(null);
   const [editingBudget, setEditingBudget] = useState(null);
+  const [filterCategory, setFilterCategory] = useState("All");
+  const [sortBy, setSortBy] = useState("date");
+  const [sortOrder, setSortOrder] = useState("desc");
 
   const [expenseForm, setExpenseForm] = useState({
     amount: "",
@@ -166,7 +169,7 @@ const BudgetPage = () => {
     setShowBudgetForm(true);
   };
 
-  const getTodayExpenses = () => {
+const getTodayExpenses = () => {
     const today = format(new Date(), "yyyy-MM-dd");
     return expenses.filter(expense => 
       format(new Date(expense.date), "yyyy-MM-dd") === today
@@ -196,6 +199,60 @@ const BudgetPage = () => {
     return budget ? budget.dailyLimit : 0;
   };
 
+  const getFilteredExpenses = () => {
+    let filtered = [...expenses];
+    
+    if (filterCategory !== "All") {
+      filtered = filtered.filter(expense => expense.category === filterCategory);
+    }
+    
+    filtered.sort((a, b) => {
+      let aValue, bValue;
+      
+      switch (sortBy) {
+        case "date":
+          aValue = new Date(a.date);
+          bValue = new Date(b.date);
+          break;
+        case "amount":
+          aValue = a.amount;
+          bValue = b.amount;
+          break;
+        case "category":
+          aValue = a.category;
+          bValue = b.category;
+          break;
+        default:
+          aValue = a.description;
+          bValue = b.description;
+      }
+      
+      if (sortOrder === "asc") {
+        return aValue > bValue ? 1 : -1;
+      } else {
+        return aValue < bValue ? 1 : -1;
+      }
+    });
+    
+    return filtered;
+  };
+
+  const getCategoryAnalytics = () => {
+    const today = format(new Date(), "yyyy-MM-dd");
+    return categories.map(category => {
+      const spending = getCategorySpending(category);
+      const budget = getCategoryBudget(category);
+      const progress = budget > 0 ? (spending / budget) * 100 : 0;
+      
+      return {
+        category,
+        spending,
+        budget,
+        progress,
+        remaining: Math.max(0, budget - spending)
+      };
+    });
+  };
   if (loading) return <Loading type="budget" />;
   if (error) return <Error message={error} onRetry={loadData} />;
 
@@ -269,45 +326,94 @@ const BudgetPage = () => {
           </div>
         </Card>
 
-        <Card className="p-6">
+<Card className="p-6">
           <div className="flex items-center justify-between mb-4">
-            <h3 className="text-lg font-semibold text-gray-900">Category Breakdown</h3>
+            <h3 className="text-lg font-semibold text-gray-900">Category Analytics</h3>
             <ApperIcon name="PieChart" className="w-5 h-5 text-gray-400" />
           </div>
-          <div className="space-y-3">
-            {categories.map(category => {
-              const spending = getCategorySpending(category);
-              const budget = getCategoryBudget(category);
-              return (
-                <div key={category} className={`category-spending ${category.toLowerCase()}`}>
+          <div className="space-y-4">
+            {getCategoryAnalytics().map(({ category, spending, budget, progress, remaining }) => (
+              <div key={category} className={`category-spending ${category.toLowerCase()}`}>
+                <div className="flex items-center justify-between mb-2">
                   <div className="flex items-center space-x-2">
                     <CategoryBadge category={category} />
-                    <span className="text-sm text-gray-600">
+                    <span className="text-sm font-medium text-gray-900">
                       ${spending.toFixed(2)}
                     </span>
                   </div>
-                  <span className="text-sm text-gray-400">
-                    / ${budget.toFixed(2)}
-                  </span>
+                  <div className="text-right">
+                    <span className="text-sm text-gray-600">
+                      / ${budget.toFixed(2)}
+                    </span>
+                    {progress > 0 && (
+                      <div className="text-xs text-gray-500">
+                        {progress.toFixed(1)}% used
+                      </div>
+                    )}
+                  </div>
                 </div>
-              );
-            })}
+                {budget > 0 && (
+                  <div className="w-full bg-gray-200 rounded-full h-2">
+                    <div 
+                      className={`h-2 rounded-full transition-all duration-300 ${
+                        progress > 100 ? 'bg-red-500' : 
+                        progress > 80 ? 'bg-yellow-500' : 'bg-green-500'
+                      }`}
+                      style={{ width: `${Math.min(progress, 100)}%` }}
+                    />
+                  </div>
+                )}
+                {remaining > 0 && (
+                  <div className="text-xs text-gray-500 mt-1">
+                    ${remaining.toFixed(2)} remaining
+                  </div>
+                )}
+              </div>
+            ))}
           </div>
         </Card>
       </div>
 
-      {/* Recent Expenses */}
+{/* Expense Management */}
       <Card className="p-6">
-        <div className="flex items-center justify-between mb-4">
-          <h3 className="text-lg font-semibold text-gray-900">Recent Expenses</h3>
-          <Button
-            variant="ghost"
-            size="small"
-            onClick={loadData}
-            icon="RefreshCw"
-          >
-            Refresh
-          </Button>
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4">
+          <h3 className="text-lg font-semibold text-gray-900">Expense Management</h3>
+          <div className="flex items-center space-x-2 mt-2 sm:mt-0">
+            <Select
+              value={filterCategory}
+              onChange={(e) => setFilterCategory(e.target.value)}
+              className="w-32"
+            >
+              <option value="All">All Categories</option>
+              {categories.map(category => (
+                <option key={category} value={category}>{category}</option>
+              ))}
+            </Select>
+            <Select
+              value={sortBy}
+              onChange={(e) => setSortBy(e.target.value)}
+              className="w-32"
+            >
+              <option value="date">Date</option>
+              <option value="amount">Amount</option>
+              <option value="category">Category</option>
+              <option value="description">Description</option>
+            </Select>
+            <Button
+              variant="ghost"
+              size="small"
+              onClick={() => setSortOrder(sortOrder === "asc" ? "desc" : "asc")}
+              icon={sortOrder === "asc" ? "ArrowUp" : "ArrowDown"}
+            />
+            <Button
+              variant="ghost"
+              size="small"
+              onClick={loadData}
+              icon="RefreshCw"
+            >
+              Refresh
+            </Button>
+          </div>
         </div>
         <div className="space-y-3">
           {expenses.length === 0 ? (
@@ -315,8 +421,8 @@ const BudgetPage = () => {
               <ApperIcon name="Receipt" className="w-12 h-12 mx-auto mb-4 text-gray-300" />
               <p>No expenses recorded yet</p>
             </div>
-          ) : (
-            expenses.slice(0, 10).map(expense => (
+) : (
+            getFilteredExpenses().slice(0, 15).map(expense => (
               <motion.div
                 key={expense.Id}
                 initial={{ opacity: 0, y: 20 }}

@@ -3,7 +3,7 @@ import { cn } from "@/utils/cn";
 import Badge from "@/components/atoms/Badge";
 
 const CategoryBadge = ({ category, className }) => {
-  const categoryConfig = {
+const categoryConfig = {
     Work: { variant: "primary", label: "Work" },
     Personal: { variant: "success", label: "Personal" },
     Health: { variant: "error", label: "Health" },

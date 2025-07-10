@@ -47,12 +47,61 @@
     "category": "Personal",
     "description": "Grocery shopping",
     "date": "2024-01-13T15:45:00Z"
-  },
+},
   {
     "Id": 8,
     "amount": 18.00,
     "category": "Health",
     "description": "Vitamins and supplements",
     "date": "2024-01-12T09:15:00Z"
+  },
+  {
+    "Id": 9,
+    "amount": 125.00,
+    "category": "Finance",
+    "description": "Monthly budget planning service",
+    "date": "2024-01-16T14:30:00Z"
+  },
+  {
+    "Id": 10,
+    "amount": 42.75,
+    "category": "Work",
+    "description": "Office supplies and stationery",
+    "date": "2024-01-16T11:00:00Z"
+  },
+  {
+    "Id": 11,
+    "amount": 28.50,
+    "category": "Personal",
+    "description": "Haircut and styling",
+    "date": "2024-01-15T16:45:00Z"
+  },
+  {
+    "Id": 12,
+    "amount": 95.25,
+    "category": "Learning",
+    "description": "Programming books and resources",
+    "date": "2024-01-14T20:15:00Z"
+  },
+  {
+    "Id": 13,
+    "amount": 76.80,
+    "category": "Leisure",
+    "description": "Concert tickets",
+    "date": "2024-01-13T18:30:00Z"
+  },
+  {
+    "Id": 14,
+    "amount": 15.25,
+    "category": "Health",
+    "description": "Protein shake",
+    "date": "2024-01-16T07:45:00Z"
+  },
+  {
+    "Id": 15,
+    "amount": 250.00,
+    "category": "Finance",
+    "description": "Investment portfolio review",
+    "date": "2024-01-12T10:00:00Z"
   }
 ]
