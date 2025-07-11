@@ -505,7 +505,7 @@ const getTodayExpenses = () => {
                 onChange={(e) => setExpenseForm(prev => ({ ...prev, amount: e.target.value }))}
                 required
               />
-              <FormField
+<FormField
                 label="Category"
                 type="select"
                 value={expenseForm.category}

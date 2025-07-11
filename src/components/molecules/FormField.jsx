@@ -13,14 +13,10 @@ const FormField = ({
   children,
   ...props 
 }) => {
-  const renderInput = () => {
-    if (children) {
-      return children;
-    }
-    
+const renderInput = () => {
     switch (type) {
       case "select":
-        return <Select {...props} />;
+        return <Select {...props}>{children}</Select>;
       case "textarea":
         return <Textarea {...props} />;
       default:
