@@ -57,7 +57,7 @@ const KanbanBoard = ({ onEditTask, onAddTask }) => {
     e.preventDefault();
     if (draggedTask && draggedTask.status !== columnId) {
       const updatedTask = { ...draggedTask, status: columnId };
-      await taskService.update(draggedTask.Id, updatedTask);
+await taskService.update(draggedTask.Id, updatedTask);
       setTasks(prev => 
         prev.map(task => 
           task.Id === draggedTask.Id ? updatedTask : task

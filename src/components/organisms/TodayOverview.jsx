@@ -47,7 +47,7 @@ const TodayOverview = ({ onAddItem }) => {
         new Date(b.updatedAt) - new Date(a.updatedAt)
       );
 
-      setTasks(todayTasks);
+setTasks(todayTasks);
       setTimeBlocks(todayTimeBlocks);
       setRecentNotes(sortedNotes.slice(0, 3));
     } catch (err) {

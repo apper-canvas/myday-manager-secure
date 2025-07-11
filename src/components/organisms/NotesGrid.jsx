@@ -37,7 +37,7 @@ const NotesGrid = ({ onEditNote, onAddNote }) => {
   const getAllTags = () => {
     const tagSet = new Set();
     notes.forEach(note => {
-      note.tags.forEach(tag => tagSet.add(tag));
+note.tags.forEach(tag => tagSet.add(tag));
     });
     return Array.from(tagSet);
   };

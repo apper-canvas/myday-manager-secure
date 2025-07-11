@@ -46,7 +46,7 @@ const BudgetWidget = () => {
   };
 
   const getTotalDailyLimit = () => {
-    return budgets.reduce((total, budget) => total + (budget.dailyLimit || 0), 0);
+return budgets.reduce((total, budget) => total + (budget.dailyLimit || 0), 0);
 };
 
   const getCategoryBreakdown = () => {

@@ -80,7 +80,7 @@ const TimeBlockCalendar = ({ onEditBlock, onAddBlock }) => {
         endTime: newEndTime.toISOString()
       };
       
-      timeBlockService.update(draggedBlock.Id, updatedBlock);
+timeBlockService.update(draggedBlock.Id, updatedBlock);
       setTimeBlocks(prev => 
         prev.map(block => 
           block.Id === draggedBlock.Id ? updatedBlock : block

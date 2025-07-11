@@ -1,7 +1,4 @@
-import mockData from '@/services/mockData/budgets.json';
-
-let budgets = [...mockData];
-let nextId = Math.max(...budgets.map(b => b.Id)) + 1;
+import { toast } from "react-toastify";
 
 // Simulate API delay
 const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
@@ -9,62 +6,279 @@ const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 export const budgetService = {
   async getAll() {
     await delay(200);
-    return [...budgets];
+    
+    try {
+      const { ApperClient } = window.ApperSDK;
+      const apperClient = new ApperClient({
+        apperProjectId: import.meta.env.VITE_APPER_PROJECT_ID,
+        apperPublicKey: import.meta.env.VITE_APPER_PUBLIC_KEY
+      });
+
+      const params = {
+        fields: [
+          { field: { Name: "Name" } },
+          { field: { Name: "Tags" } },
+          { field: { Name: "category" } },
+          { field: { Name: "daily_limit" } },
+          { field: { Name: "monthly_limit" } }
+        ]
+      };
+
+      const response = await apperClient.fetchRecords('budget', params);
+      
+      if (!response.success) {
+        console.error(response.message);
+        toast.error(response.message);
+        return [];
+      }
+
+      if (!response.data || response.data.length === 0) {
+        return [];
+      }
+
+      return response.data.map(budget => ({
+        Id: budget.Id,
+        Name: budget.Name,
+        Tags: budget.Tags,
+        category: budget.category,
+        dailyLimit: budget.daily_limit,
+        monthlyLimit: budget.monthly_limit
+      }));
+    } catch (error) {
+      if (error?.response?.data?.message) {
+        console.error("Error fetching budgets:", error?.response?.data?.message);
+      } else {
+        console.error(error.message);
+      }
+      return [];
+    }
   },
 
   async getById(id) {
     await delay(200);
-    const parsedId = parseInt(id);
-    if (isNaN(parsedId)) {
-      throw new Error('Invalid budget ID');
+    
+    try {
+      const { ApperClient } = window.ApperSDK;
+      const apperClient = new ApperClient({
+        apperProjectId: import.meta.env.VITE_APPER_PROJECT_ID,
+        apperPublicKey: import.meta.env.VITE_APPER_PUBLIC_KEY
+      });
+
+      const params = {
+        fields: [
+          { field: { Name: "Name" } },
+          { field: { Name: "Tags" } },
+          { field: { Name: "category" } },
+          { field: { Name: "daily_limit" } },
+          { field: { Name: "monthly_limit" } }
+        ]
+      };
+
+      const response = await apperClient.getRecordById('budget', id, params);
+      
+      if (!response || !response.data) {
+        return null;
+      }
+
+      const budget = response.data;
+      return {
+        Id: budget.Id,
+        Name: budget.Name,
+        Tags: budget.Tags,
+        category: budget.category,
+        dailyLimit: budget.daily_limit,
+        monthlyLimit: budget.monthly_limit
+      };
+    } catch (error) {
+      if (error?.response?.data?.message) {
+        console.error(`Error fetching budget with ID ${id}:`, error?.response?.data?.message);
+      } else {
+        console.error(error.message);
+      }
+      return null;
     }
-    const budget = budgets.find(b => b.Id === parsedId);
-    if (!budget) {
-      throw new Error('Budget not found');
-    }
-    return { ...budget };
   },
 
   async create(budgetData) {
     await delay(300);
-    // Check if budget already exists for this category
-    const existingBudget = budgets.find(b => b.category === budgetData.category);
-    if (existingBudget) {
-      throw new Error('Budget already exists for this category');
+    
+    try {
+      const { ApperClient } = window.ApperSDK;
+      const apperClient = new ApperClient({
+        apperProjectId: import.meta.env.VITE_APPER_PROJECT_ID,
+        apperPublicKey: import.meta.env.VITE_APPER_PUBLIC_KEY
+      });
+
+      const params = {
+        records: [{
+          Name: budgetData.Name || `${budgetData.category} Budget`,
+          Tags: budgetData.Tags || '',
+          category: budgetData.category,
+          daily_limit: budgetData.dailyLimit,
+          monthly_limit: budgetData.monthlyLimit
+        }]
+      };
+
+      const response = await apperClient.createRecord('budget', params);
+      
+      if (!response.success) {
+        console.error(response.message);
+        toast.error(response.message);
+        return null;
+      }
+
+      if (response.results) {
+        const successfulRecords = response.results.filter(result => result.success);
+        const failedRecords = response.results.filter(result => !result.success);
+        
+        if (failedRecords.length > 0) {
+          console.error(`Failed to create ${failedRecords.length} records:${JSON.stringify(failedRecords)}`);
+          
+          failedRecords.forEach(record => {
+            record.errors?.forEach(error => {
+              toast.error(`${error.fieldLabel}: ${error.message}`);
+            });
+            if (record.message) toast.error(record.message);
+          });
+        }
+        
+        if (successfulRecords.length > 0) {
+          const budget = successfulRecords[0].data;
+          return {
+            Id: budget.Id,
+            Name: budget.Name,
+            Tags: budget.Tags,
+            category: budget.category,
+            dailyLimit: budget.daily_limit,
+            monthlyLimit: budget.monthly_limit
+          };
+        }
+      }
+
+      return null;
+    } catch (error) {
+      if (error?.response?.data?.message) {
+        console.error("Error creating budget:", error?.response?.data?.message);
+      } else {
+        console.error(error.message);
+      }
+      return null;
     }
-    const newBudget = {
-      ...budgetData,
-      Id: nextId++
-    };
-    budgets.push(newBudget);
-    return { ...newBudget };
   },
 
   async update(id, budgetData) {
     await delay(300);
-    const parsedId = parseInt(id);
-    if (isNaN(parsedId)) {
-      throw new Error('Invalid budget ID');
+    
+    try {
+      const { ApperClient } = window.ApperSDK;
+      const apperClient = new ApperClient({
+        apperProjectId: import.meta.env.VITE_APPER_PROJECT_ID,
+        apperPublicKey: import.meta.env.VITE_APPER_PUBLIC_KEY
+      });
+
+      const params = {
+        records: [{
+          Id: parseInt(id),
+          Name: budgetData.Name || `${budgetData.category} Budget`,
+          Tags: budgetData.Tags || '',
+          category: budgetData.category,
+          daily_limit: budgetData.dailyLimit,
+          monthly_limit: budgetData.monthlyLimit
+        }]
+      };
+
+      const response = await apperClient.updateRecord('budget', params);
+      
+      if (!response.success) {
+        console.error(response.message);
+        toast.error(response.message);
+        return null;
+      }
+
+      if (response.results) {
+        const successfulUpdates = response.results.filter(result => result.success);
+        const failedUpdates = response.results.filter(result => !result.success);
+        
+        if (failedUpdates.length > 0) {
+          console.error(`Failed to update ${failedUpdates.length} records:${JSON.stringify(failedUpdates)}`);
+          
+          failedUpdates.forEach(record => {
+            record.errors?.forEach(error => {
+              toast.error(`${error.fieldLabel}: ${error.message}`);
+            });
+            if (record.message) toast.error(record.message);
+          });
+        }
+        
+        if (successfulUpdates.length > 0) {
+          const budget = successfulUpdates[0].data;
+          return {
+            Id: budget.Id,
+            Name: budget.Name,
+            Tags: budget.Tags,
+            category: budget.category,
+            dailyLimit: budget.daily_limit,
+            monthlyLimit: budget.monthly_limit
+          };
+        }
+      }
+
+      return null;
+    } catch (error) {
+      if (error?.response?.data?.message) {
+        console.error("Error updating budget:", error?.response?.data?.message);
+      } else {
+        console.error(error.message);
+      }
+      return null;
     }
-    const index = budgets.findIndex(b => b.Id === parsedId);
-    if (index === -1) {
-      throw new Error('Budget not found');
-    }
-    budgets[index] = { ...budgets[index], ...budgetData, Id: parsedId };
-    return { ...budgets[index] };
   },
 
   async delete(id) {
     await delay(200);
-    const parsedId = parseInt(id);
-    if (isNaN(parsedId)) {
-      throw new Error('Invalid budget ID');
+    
+    try {
+      const { ApperClient } = window.ApperSDK;
+      const apperClient = new ApperClient({
+        apperProjectId: import.meta.env.VITE_APPER_PROJECT_ID,
+        apperPublicKey: import.meta.env.VITE_APPER_PUBLIC_KEY
+      });
+
+      const params = {
+        RecordIds: [parseInt(id)]
+      };
+
+      const response = await apperClient.deleteRecord('budget', params);
+      
+      if (!response.success) {
+        console.error(response.message);
+        toast.error(response.message);
+        return false;
+      }
+
+      if (response.results) {
+        const successfulDeletions = response.results.filter(result => result.success);
+        const failedDeletions = response.results.filter(result => !result.success);
+        
+        if (failedDeletions.length > 0) {
+          console.error(`Failed to delete ${failedDeletions.length} records:${JSON.stringify(failedDeletions)}`);
+          
+          failedDeletions.forEach(record => {
+            if (record.message) toast.error(record.message);
+          });
+        }
+        
+        return successfulDeletions.length > 0;
+      }
+
+      return false;
+    } catch (error) {
+      if (error?.response?.data?.message) {
+        console.error("Error deleting budget:", error?.response?.data?.message);
+      } else {
+        console.error(error.message);
+      }
+      return false;
     }
-    const index = budgets.findIndex(b => b.Id === parsedId);
-    if (index === -1) {
-      throw new Error('Budget not found');
-    }
-    budgets.splice(index, 1);
-    return true;
   }
 };
